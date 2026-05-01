@@ -1,0 +1,1645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS101 MASTERCLASS – Mohammad's Exam Domination Kit</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --bg2: #0f0f1a;
+  --bg3: #141428;
+  --card: #111120;
+  --border: #2a2a45;
+  --accent: #e63946;
+  --accent2: #06d6a0;
+  --accent3: #ffd166;
+  --accent4: #118ab2;
+  --text: #e0e0f0;
+  --muted: #7070a0;
+  --code-bg: #0a0a15;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+#hero {
+  background: linear-gradient(135deg, #080810 0%, #120820 50%, #080810 100%);
+  padding: 60px 20px 50px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(230,57,70,0.12) 0%, transparent 70%);
+}
+.hero-tag {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  font-size: 0.75rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 96px);
+  letter-spacing: 6px;
+  line-height: 1;
+  background: linear-gradient(135deg, #fff 0%, var(--accent) 60%, #ff6b7a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+.hero-sub {
+  font-size: 1rem;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 30px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.hero-sub span { color: var(--accent2); font-weight: 600; }
+.hero-stats {
+  display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+}
+.stat-pill {
+  background: rgba(230,57,70,0.1);
+  border: 1px solid rgba(230,57,70,0.3);
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+}
+
+/* ── NAV ── */
+#nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,8,16,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  display: flex;
+  overflow-x: auto;
+  gap: 0;
+}
+.nav-btn {
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.nav-btn:hover { color: var(--text); }
+.nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── LAYOUT ── */
+#content { max-width: 1100px; margin: 0 auto; padding: 40px 20px 80px; }
+.unit { display: none; }
+.unit.active { display: block; }
+
+/* ── SECTION HEADERS ── */
+.unit-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 40px; padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.unit-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 64px;
+  color: var(--accent);
+  line-height: 1;
+  opacity: 0.3;
+}
+.unit-title-block h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 36px;
+  letter-spacing: 3px;
+  color: var(--text);
+}
+.unit-title-block p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+
+/* ── CARDS ── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+.card.green::before { background: linear-gradient(90deg, var(--accent2), transparent); }
+.card.yellow::before { background: linear-gradient(90deg, var(--accent3), transparent); }
+.card.blue::before { background: linear-gradient(90deg, var(--accent4), transparent); }
+.card h3 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 10px;
+}
+.card.green h3 { color: var(--accent2); }
+.card.yellow h3 { color: var(--accent3); }
+.card.blue h3 { color: var(--accent4); }
+.card p { line-height: 1.8; color: var(--text); opacity: 0.85; margin-bottom: 12px; }
+.card ul { padding-left: 20px; }
+.card ul li { line-height: 2; opacity: 0.85; }
+
+/* ── CODE BLOCKS ── */
+.code-block {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin: 16px 0;
+  overflow: hidden;
+}
+.code-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 16px;
+  background: rgba(42,42,69,0.5);
+  border-bottom: 1px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.code-header .lang { color: var(--accent3); }
+pre {
+  padding: 20px;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.82rem;
+  line-height: 1.8;
+}
+.kw { color: #c792ea; } /* keywords */
+.fn { color: #82aaff; } /* functions */
+.str { color: #c3e88d; } /* strings */
+.num { color: #f78c6c; } /* numbers */
+.cm { color: #546e7a; font-style: italic; } /* comments */
+.tp { color: #ffcb6b; } /* types */
+.op { color: #89ddff; } /* operators */
+
+/* ── MALAN CALLOUT ── */
+.malan-says {
+  background: linear-gradient(135deg, rgba(230,57,70,0.08), rgba(230,57,70,0.03));
+  border-left: 3px solid var(--accent);
+  padding: 20px 24px;
+  margin: 20px 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+}
+.malan-says::before {
+  content: '📢 Malan says: ';
+  font-style: normal;
+  font-weight: 600;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+.malan-says p { margin-top: 8px; color: var(--text); opacity: 0.9; }
+
+/* ── EXAM TRAP ── */
+.trap {
+  background: rgba(255,209,102,0.05);
+  border: 1px dashed var(--accent3);
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0;
+}
+.trap::before {
+  content: '⚠️  EXAM TRAP: ';
+  font-weight: 700;
+  color: var(--accent3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+}
+
+/* ── MCQ QUIZ ── */
+.quiz-section { margin-top: 40px; }
+.quiz-section h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+  margin-bottom: 24px;
+  color: var(--accent3);
+  display: flex; align-items: center; gap: 12px;
+}
+.mcq-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: border-color 0.3s;
+}
+.mcq-card:hover { border-color: rgba(230,57,70,0.3); }
+.q-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+.q-source {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.options { display: flex; flex-direction: column; gap: 8px; }
+.opt-btn {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 16px;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 0.88rem;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.opt-btn:hover:not(:disabled) {
+  background: rgba(230,57,70,0.1);
+  border-color: var(--accent);
+}
+.opt-btn.correct {
+  background: rgba(6,214,160,0.15) !important;
+  border-color: var(--accent2) !important;
+  color: var(--accent2);
+}
+.opt-btn.wrong {
+  background: rgba(230,57,70,0.15) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent);
+}
+.explanation {
+  display: none;
+  margin-top: 14px;
+  padding: 14px 16px;
+  background: rgba(6,214,160,0.05);
+  border-left: 3px solid var(--accent2);
+  border-radius: 0 6px 6px 0;
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: var(--accent2);
+}
+.explanation.show { display: block; }
+
+/* ── TABLE ── */
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 0.85rem;
+}
+.styled-table th {
+  background: rgba(230,57,70,0.1);
+  color: var(--accent);
+  padding: 12px 16px;
+  text-align: left;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--border);
+}
+.styled-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(42,42,69,0.5);
+  color: var(--text);
+  opacity: 0.85;
+  vertical-align: top;
+}
+.styled-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+/* ── GENERATION TABLE colors ── */
+.gen1 { color: #c792ea; }
+.gen2 { color: #82aaff; }
+.gen3 { color: var(--accent2); }
+.gen4 { color: var(--accent3); }
+.gen5 { color: var(--accent); }
+
+/* ── SCORE ── */
+#score-bar {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: rgba(8,8,16,0.95);
+  border-top: 1px solid var(--border);
+  padding: 14px 30px;
+  display: flex; justify-content: center; align-items: center; gap: 30px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  z-index: 99;
+}
+.score-label { color: var(--muted); }
+.score-val { color: var(--accent2); font-weight: 700; font-size: 1.1rem; }
+.reset-btn {
+  background: rgba(230,57,70,0.1);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+.reset-btn:hover { background: rgba(230,57,70,0.25); }
+
+/* ── GRID ── */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
+
+/* ── BADGE ── */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  margin-left: 8px;
+}
+.badge-red { background: rgba(230,57,70,0.2); color: var(--accent); border: 1px solid rgba(230,57,70,0.4); }
+.badge-green { background: rgba(6,214,160,0.2); color: var(--accent2); border: 1px solid rgba(6,214,160,0.4); }
+.badge-yellow { background: rgba(255,209,102,0.2); color: var(--accent3); border: 1px solid rgba(255,209,102,0.4); }
+
+/* ── PROGRESS ── */
+.progress-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 20px 0; }
+.prog-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.prog-item:hover { border-color: var(--accent); transform: translateY(-2px); }
+.prog-unit { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--accent); }
+.prog-name { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+
+/* animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.unit.active .card { animation: fadeUp 0.4s ease both; }
+.unit.active .card:nth-child(2) { animation-delay: 0.05s; }
+.unit.active .card:nth-child(3) { animation-delay: 0.1s; }
+.unit.active .card:nth-child(4) { animation-delay: 0.15s; }
+</style>
+</head>
+<body>
+
+<div id="hero">
+  <div class="hero-tag">Integral University · CS101 · Computer Programming</div>
+  <h1>MASTERCLASS</h1>
+  <p class="hero-sub">Built for <span>Mohammad Farooque Ansari</span> · Crafted in the spirit of <span>David J. Malan</span></p>
+  <div class="hero-stats">
+    <div class="stat-pill">5 UNITS COVERED</div>
+    <div class="stat-pill">PYQ 2022–2025</div>
+    <div class="stat-pill">50+ MCQs</div>
+    <div class="stat-pill">CODE EXAMPLES</div>
+    <div class="stat-pill">EXAM TRAPS</div>
+  </div>
+</div>
+
+<div id="nav">
+  <button class="nav-btn active" onclick="showUnit(0)">🏠 HOME</button>
+  <button class="nav-btn" onclick="showUnit(1)">U1 · COMPUTERS</button>
+  <button class="nav-btn" onclick="showUnit(2)">U2 · INTRO TO C</button>
+  <button class="nav-btn" onclick="showUnit(3)">U3 · POINTERS & FN</button>
+  <button class="nav-btn" onclick="showUnit(4)">U4 · ARRAYS & STR</button>
+  <button class="nav-btn" onclick="showUnit(5)">U5 · STRUCT & DMA</button>
+  <button class="nav-btn" onclick="showUnit(6)">🎯 PYQ BATTLE</button>
+</div>
+
+<div id="content">
+
+<!-- ══════════════ HOME ══════════════ -->
+<div class="unit active" id="unit-0">
+  <div class="unit-header">
+    <div class="unit-num">00</div>
+    <div class="unit-title-block">
+      <h2>YOUR BATTLE PLAN</h2>
+      <p>Everything you need. Nothing you don't.</p>
+    </div>
+  </div>
+
+  <div class="malan-says">
+    <p>"This is CS50." — Well, this is CS101 Integral, and by the end of this, no question will make you flinch. Let's get to work.</p>
+  </div>
+
+  <div class="progress-grid">
+    <div class="prog-item" onclick="showUnit(1)"><div class="prog-unit">U1</div><div class="prog-name">Computers & Networks</div></div>
+    <div class="prog-item" onclick="showUnit(2)"><div class="prog-unit">U2</div><div class="prog-name">Intro to C</div></div>
+    <div class="prog-item" onclick="showUnit(3)"><div class="prog-unit">U3</div><div class="prog-name">Pointers & Functions</div></div>
+    <div class="prog-item" onclick="showUnit(4)"><div class="prog-unit">U4</div><div class="prog-name">Arrays & Strings</div></div>
+    <div class="prog-item" onclick="showUnit(5)"><div class="prog-unit">U5</div><div class="prog-name">Structures & DMA</div></div>
+  </div>
+
+  <div class="card yellow">
+    <h3>🔥 GUARANTEED EXAM QUESTIONS (based on PYQ pattern)</h3>
+    <table class="styled-table">
+      <tr><th>TOPIC</th><th>FREQUENCY</th><th>TYPE</th></tr>
+      <tr><td>Generations of Computers</td><td><span class="badge badge-red">EVERY YEAR</span></td><td>Section B/C Long</td></tr>
+      <tr><td>Call by Value vs Call by Reference</td><td><span class="badge badge-red">EVERY YEAR</span></td><td>Code + Theory</td></tr>
+      <tr><td>Bubble Sort</td><td><span class="badge badge-red">EVERY YEAR</span></td><td>Code</td></tr>
+      <tr><td>Pointer types (NULL, wild, dangling)</td><td><span class="badge badge-red">EVERY YEAR</span></td><td>MCQ + Short</td></tr>
+      <tr><td>Network Topologies (LAN/MAN/WAN)</td><td><span class="badge badge-red">EVERY YEAR</span></td><td>MCQ + Short</td></tr>
+      <tr><td>Fibonacci (recursion + without)</td><td><span class="badge badge-yellow">OFTEN</span></td><td>Code</td></tr>
+      <tr><td>Armstrong / Palindrome / Pattern</td><td><span class="badge badge-yellow">OFTEN</span></td><td>Code</td></tr>
+      <tr><td>Structure vs Union</td><td><span class="badge badge-yellow">OFTEN</span></td><td>Theory + Code</td></tr>
+      <tr><td>malloc vs calloc</td><td><span class="badge badge-yellow">OFTEN</span></td><td>Short</td></tr>
+      <tr><td>String handling functions</td><td><span class="badge badge-green">MODERATE</span></td><td>Code</td></tr>
+    </table>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h3>📋 EXAM FORMAT 2024-25</h3>
+      <ul>
+        <li>Section A: 10 × 1 = 10 marks (MCQ/Short)</li>
+        <li>Section B: 4 × 2.5 = 10 marks (Short Ans)</li>
+        <li>Section C: Long answer questions</li>
+        <li>Section D: Descriptive/design questions</li>
+        <li>Total: 75 marks · 3 hours</li>
+      </ul>
+    </div>
+    <div class="card green">
+      <h3>⚡ QUICK STRATEGY</h3>
+      <ul>
+        <li>Section A: All 10 are compulsory — zero mercy</li>
+        <li>Memorize: generations, topologies, pointer types</li>
+        <li>Practice writing: Bubble Sort, Fibonacci, Factorial</li>
+        <li>Always attempt Pointers questions — easy marks</li>
+        <li>Structure programs: include, main, return 0</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ UNIT 1 ══════════════ -->
+<div class="unit" id="unit-1">
+  <div class="unit-header">
+    <div class="unit-num">01</div>
+    <div class="unit-title-block">
+      <h2>INTRODUCTION TO COMPUTERS</h2>
+      <p>Generations · Components · Networks · OS · Internet · Flowcharts</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>⚡ GENERATIONS OF COMPUTERS — memorize this cold</h3>
+    <table class="styled-table">
+      <tr><th>GEN</th><th>PERIOD</th><th>TECHNOLOGY</th><th>EXAMPLE</th><th>FEATURE</th></tr>
+      <tr><td class="gen1">1st</td><td>1940–1956</td><td>Vacuum Tubes</td><td>ENIAC, UNIVAC</td><td>Huge, hot, unreliable, machine language only</td></tr>
+      <tr><td class="gen2">2nd</td><td>1956–1963</td><td>Transistors</td><td>IBM 7094</td><td>Smaller, faster, assembly language</td></tr>
+      <tr><td class="gen3">3rd</td><td>1964–1971</td><td>ICs (Integrated Circuits)</td><td>IBM 360</td><td>High-level languages, keyboards, monitors</td></tr>
+      <tr><td class="gen4">4th</td><td>1971–present</td><td>Microprocessors (VLSI)</td><td>Intel 4004, PC</td><td>Personal computers, GUIs, mouse</td></tr>
+      <tr><td class="gen5">5th</td><td>Present+</td><td>AI / ULSI</td><td>Modern AI systems</td><td>Machine learning, voice recognition, parallel processing</td></tr>
+    </table>
+    <div class="trap">
+      <strong>Vacuum tubes = 1st Gen.</strong> This is asked every single year in Section-A. "Name the generation era using vacuum tubes" → Answer: <strong>First Generation (1940–1956)</strong>.
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h3>🖥️ COMPONENTS OF A COMPUTER</h3>
+    <p><strong>CPU (Central Processing Unit)</strong> = Brain of computer. Has 3 parts:</p>
+    <ul>
+      <li><strong>ALU</strong> (Arithmetic Logic Unit) — does math and logic operations</li>
+      <li><strong>CU</strong> (Control Unit) — directs all operations</li>
+      <li><strong>Registers</strong> — tiny, fastest memory inside CPU</li>
+    </ul>
+    <p style="margin-top:12px"><strong>Memory Hierarchy</strong> (fastest → slowest, smallest → largest):</p>
+    <p style="font-family:'JetBrains Mono',monospace; color:var(--accent3)">Registers → Cache → RAM → ROM → Hard Disk → Cloud</p>
+    <p style="margin-top:12px"><strong>Key Memory types:</strong></p>
+    <ul>
+      <li><strong>RAM</strong> — Volatile, temporary, fast</li>
+      <li><strong>ROM</strong> — Non-volatile, permanent, read-only</li>
+      <li><strong>Cache</strong> — Between CPU and RAM, very fast</li>
+      <li><strong>Virtual Memory</strong> — Part of HDD used as RAM when RAM is full</li>
+    </ul>
+  </div>
+
+  <div class="card green">
+    <h3>🌐 NETWORK TOPOLOGIES — draw these!</h3>
+    <div class="grid2">
+      <div>
+        <p><strong>Star ⭐</strong> — All nodes connect to central hub/switch. Hub failure = network down. Easy to manage.</p>
+        <p style="margin-top:10px"><strong>Bus 🚌</strong> — Single backbone cable. Simple, cheap. Cable failure = all down.</p>
+        <p style="margin-top:10px"><strong>Ring 🔄</strong> — Each node connects to exactly 2 others. Data travels in one direction.</p>
+      </div>
+      <div>
+        <p><strong>Mesh 🕸️</strong> — Every node connects to every other. Most reliable, most expensive. Used in WANs.</p>
+        <p style="margin-top:10px"><strong>Tree 🌲</strong> — Hierarchical star topology. Root node + branches.</p>
+      </div>
+    </div>
+    <div class="trap">
+      "Which topology requires a central controller or hub?" → <strong>STAR topology</strong> (asked in PYQ 2022-23)
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📡 LAN vs MAN vs WAN</h3>
+    <table class="styled-table">
+      <tr><th>TYPE</th><th>FULL FORM</th><th>RANGE</th><th>EXAMPLE</th><th>SPEED</th></tr>
+      <tr><td style="color:var(--accent2)">LAN</td><td>Local Area Network</td><td>Room / Building</td><td>Office, Lab, Home</td><td>Very High (1–10 Gbps)</td></tr>
+      <tr><td style="color:var(--accent3)">MAN</td><td>Metropolitan Area Network</td><td>City / Town</td><td>City cable TV, ISP</td><td>High (10–100 Mbps)</td></tr>
+      <tr><td style="color:var(--accent)">WAN</td><td>Wide Area Network</td><td>Country / World</td><td>Internet, ARPANET</td><td>Variable (slower)</td></tr>
+    </table>
+    <div class="trap">
+      PYQ 2023-24 asked: "Describe the meaning of MAN." → Metropolitan Area Network — covers a city-sized area.
+    </div>
+  </div>
+
+  <div class="card yellow">
+    <h3>📊 FLOWCHART SYMBOLS — Section A staple</h3>
+    <table class="styled-table">
+      <tr><th>SYMBOL</th><th>SHAPE</th><th>MEANING</th></tr>
+      <tr><td>Terminal</td><td>Rounded Rectangle (Oval)</td><td>Start / Stop</td></tr>
+      <tr><td>Process</td><td>Rectangle</td><td>Operation / Calculation</td></tr>
+      <tr><td>Decision</td><td>Diamond</td><td>Yes/No question</td></tr>
+      <tr><td>Input/Output</td><td>Parallelogram</td><td>Read / Print</td></tr>
+      <tr><td>Connector</td><td>Circle</td><td>Connect flow lines</td></tr>
+      <tr><td>Arrow</td><td>Arrow line</td><td>Flow direction</td></tr>
+    </table>
+  </div>
+
+  <div class="card blue">
+    <h3>🔧 OPERATING SYSTEM — Key Services</h3>
+    <ul>
+      <li><strong>Process Management</strong> — scheduling, creating, terminating processes</li>
+      <li><strong>Memory Management</strong> — allocation and deallocation of RAM</li>
+      <li><strong>File System Management</strong> — creating, reading, writing files</li>
+      <li><strong>Device Management</strong> — managing I/O devices via drivers</li>
+      <li><strong>Security & Protection</strong> — user authentication, access control</li>
+      <li><strong>User Interface</strong> — CLI (command line) or GUI</li>
+    </ul>
+    <div class="trap">
+      "Which of the following is NOT an OS?" → <strong>Oracle</strong> (it's a database). Windows, Linux, DOS are OS. (PYQ 2022-23)
+    </div>
+  </div>
+
+  <!-- UNIT 1 MCQs -->
+  <div class="quiz-section">
+    <h3>🎯 UNIT 1 · MCQ DRILL</h3>
+
+    <div class="mcq-card" id="q1_1">
+      <div class="q-source">PYQ · End Sem 2022-23 · Section A</div>
+      <div class="q-text">Q. Which network topology requires a central controller or hub?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q1_1')">A) Mesh</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q1_1')">B) Star</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q1_1')">C) Ring</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q1_1')">D) Bus</button>
+      </div>
+      <div class="explanation" id="exp_q1_1">✅ <strong>Star topology</strong> requires a central hub/switch. All devices connect directly to it. If the hub fails, the entire network goes down.</div>
+    </div>
+
+    <div class="mcq-card" id="q1_2">
+      <div class="q-source">PYQ · End Sem 2022-23 · Section A</div>
+      <div class="q-text">Q. Which of the following is NOT an operating system?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q1_2')">A) Windows</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q1_2')">B) Linux</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q1_2')">C) Oracle</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q1_2')">D) DOS</button>
+      </div>
+      <div class="explanation" id="exp_q1_2">✅ <strong>Oracle</strong> is a relational database management system (RDBMS), not an OS. Windows, Linux, and DOS are all operating systems.</div>
+    </div>
+
+    <div class="mcq-card" id="q1_3">
+      <div class="q-source">PYQ · End Sem 2024-25 · Section A</div>
+      <div class="q-text">Q. Name the generation era and its technology when computers were using vacuum tubes.</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q1_3')">A) 2nd Gen — Transistors</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q1_3')">B) 1st Gen (1940–1956) — Vacuum Tubes</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q1_3')">C) 3rd Gen — Integrated Circuits</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q1_3')">D) 4th Gen — Microprocessors</button>
+      </div>
+      <div class="explanation" id="exp_q1_3">✅ <strong>First Generation (1940–1956)</strong> used vacuum tubes. Famous computers: ENIAC, UNIVAC. They were massive, consumed huge power, and produced a lot of heat.</div>
+    </div>
+
+    <div class="mcq-card" id="q1_4">
+      <div class="q-source">PYQ · Section A pattern</div>
+      <div class="q-text">Q. What type of communication allows data to travel in both directions, but only one direction at a time?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q1_4')">A) Simplex</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q1_4')">B) Half-Duplex</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q1_4')">C) Full-Duplex</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q1_4')">D) Broadcast</button>
+      </div>
+      <div class="explanation" id="exp_q1_4">✅ <strong>Half-Duplex</strong> — data travels both ways but only one direction at a time. Example: Walkie-talkie. Full-Duplex = phone call (both ways simultaneously). Simplex = one direction only (TV broadcast).</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ UNIT 2 ══════════════ -->
+<div class="unit" id="unit-2">
+  <div class="unit-header">
+    <div class="unit-num">02</div>
+    <div class="unit-title-block">
+      <h2>INTRODUCTION TO C</h2>
+      <p>Data types · Operators · Conditionals · Loops · Switch</p>
+    </div>
+  </div>
+
+  <div class="malan-says">
+    <p>"C is not a forgiving language. It will do exactly what you tell it to — even if that's wrong." Understand the rules, and C becomes your superpower.</p>
+  </div>
+
+  <div class="card">
+    <h3>📦 DATA TYPES IN C</h3>
+    <table class="styled-table">
+      <tr><th>TYPE</th><th>SIZE</th><th>FORMAT SPEC</th><th>RANGE (approx)</th></tr>
+      <tr><td style="color:var(--accent2)">int</td><td>4 bytes</td><td>%d</td><td>-2,147,483,648 to 2,147,483,647</td></tr>
+      <tr><td style="color:var(--accent3)">float</td><td>4 bytes</td><td>%f</td><td>±3.4 × 10^38</td></tr>
+      <tr><td style="color:var(--accent)">double</td><td>8 bytes</td><td>%lf</td><td>±1.7 × 10^308</td></tr>
+      <tr><td style="color:#c792ea">char</td><td>1 byte</td><td>%c</td><td>-128 to 127</td></tr>
+      <tr><td style="color:var(--accent4)">void</td><td>0 bytes</td><td>—</td><td>No value</td></tr>
+    </table>
+    <div class="trap">
+      "Assuming int is 4 bytes, what is the size of int arr[15]?" → 15 × 4 = <strong>60 bytes</strong>. (PYQ 2022-23, Section A)
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h3>🔁 LOOPS — Entry Control vs Exit Control</h3>
+    <div class="grid2">
+      <div>
+        <p><strong>Entry Control Loops</strong> — condition checked BEFORE body executes:</p>
+        <ul><li>for loop</li><li>while loop</li></ul>
+        <p style="margin-top:10px"><strong>Exit Control Loops</strong> — condition checked AFTER body executes:</p>
+        <ul><li>do-while loop ← body ALWAYS executes at least once</li></ul>
+      </div>
+      <div>
+        <div class="code-block">
+          <div class="code-header"><span class="lang">C</span><span>do-while</span></div>
+<pre><span class="kw">do</span> {
+    <span class="cm">/* executes at least once */</span>
+    <span class="fn">printf</span>(<span class="str">"Hello\n"</span>);
+} <span class="kw">while</span> (condition);</pre>
+        </div>
+      </div>
+    </div>
+    <div class="trap">
+      "Which loop ensures the body executes at least once?" → <strong>do-while</strong> (PYQ 2022-23, 2024-25)
+    </div>
+  </div>
+
+  <div class="card green">
+    <h3>🔢 OPERATORS — Precedence traps</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Operator Precedence Trap</span></div>
+<pre><span class="kw">int</span> x = <span class="num">5</span>*<span class="num">9</span>/<span class="num">3</span>+<span class="num">9</span>;
+<span class="cm">// Step 1: 5*9 = 45 (left to right, * and / same precedence)</span>
+<span class="cm">// Step 2: 45/3 = 15</span>
+<span class="cm">// Step 3: 15+9 = 24</span>
+<span class="cm">// x = 24</span></pre>
+    </div>
+    <div class="trap">
+      PYQ 2022-23: "int x = 5*9/3+9; What is x?" → Answer is <strong>24</strong>, NOT 3 or 3.75. Integer division, left-to-right for * and /.
+    </div>
+    <p style="margin-top:12px"><strong>Conditional (Ternary) Operator:</strong></p>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Syntax</span></div>
+<pre><span class="cm">// condition ? value_if_true : value_if_false</span>
+<span class="kw">int</span> max = (a > b) ? a : b;
+<span class="cm">// If a > b is TRUE, max = a. Else max = b.</span></pre>
+    </div>
+  </div>
+
+  <div class="card yellow">
+    <h3>🔀 SWITCH STATEMENT</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Calculator using switch (PYQ Practical #9)</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> a, b, choice;
+    <span class="kw">char</span> op;
+    <span class="fn">printf</span>(<span class="str">"Enter two numbers: "</span>);
+    <span class="fn">scanf</span>(<span class="str">"%d %d"</span>, &amp;a, &amp;b);
+    <span class="fn">printf</span>(<span class="str">"Enter operator (+,-,*,/): "</span>);
+    <span class="fn">scanf</span>(<span class="str">" %c"</span>, &amp;op);
+    <span class="kw">switch</span>(op) {
+        <span class="kw">case</span> <span class="str">'+'</span>: <span class="fn">printf</span>(<span class="str">"%d\n"</span>, a+b); <span class="kw">break</span>;
+        <span class="kw">case</span> <span class="str">'-'</span>: <span class="fn">printf</span>(<span class="str">"%d\n"</span>, a-b); <span class="kw">break</span>;
+        <span class="kw">case</span> <span class="str">'*'</span>: <span class="fn">printf</span>(<span class="str">"%d\n"</span>, a*b); <span class="kw">break</span>;
+        <span class="kw">case</span> <span class="str">'/'</span>:
+            <span class="kw">if</span>(b != <span class="num">0</span>) <span class="fn">printf</span>(<span class="str">"%d\n"</span>, a/b);
+            <span class="kw">else</span> <span class="fn">printf</span>(<span class="str">"Division by zero!\n"</span>);
+            <span class="kw">break</span>;
+        <span class="kw">default</span>: <span class="fn">printf</span>(<span class="str">"Invalid operator\n"</span>);
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🌟 PATTERN PRINTING — PYQ Practical</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Star Triangle Pattern (PYQ every year)</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> i, j;
+    <span class="kw">for</span>(i = <span class="num">1</span>; i &lt;= <span class="num">5</span>; i++) {
+        <span class="kw">for</span>(j = <span class="num">1</span>; j &lt;= i; j++) {
+            <span class="fn">printf</span>(<span class="str">"* "</span>);
+        }
+        <span class="fn">printf</span>(<span class="str">"\n"</span>);
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}
+<span class="cm">/* Output:
+*
+* *
+* * *
+* * * *
+* * * * *
+*/</span></pre>
+    </div>
+  </div>
+
+  <!-- UNIT 2 MCQs -->
+  <div class="quiz-section">
+    <h3>🎯 UNIT 2 · MCQ DRILL</h3>
+
+    <div class="mcq-card" id="q2_1">
+      <div class="q-source">PYQ · End Sem 2022-23 · Section A</div>
+      <div class="q-text">Q. What will be the final value of x?<br><code style="font-family:'JetBrains Mono',monospace; color:var(--accent3)">int x = 5*9/3+9;</code></div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q2_1')">A) 3.75</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q2_1')">B) Depends on compiler</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q2_1')">C) 24</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q2_1')">D) 3</button>
+      </div>
+      <div class="explanation" id="exp_q2_1">✅ 5*9 = 45, 45/3 = 15, 15+9 = <strong>24</strong>. * and / have equal precedence, evaluated left to right. Integer division throughout.</div>
+    </div>
+
+    <div class="mcq-card" id="q2_2">
+      <div class="q-source">PYQ · 2022-23 / CA 2024-25 · Section A</div>
+      <div class="q-text">Q. Which loop construct will ALWAYS be executed at least once?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q2_2')">A) for</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q2_2')">B) while</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q2_2')">C) switch</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q2_2')">D) do-while</button>
+      </div>
+      <div class="explanation" id="exp_q2_2">✅ <strong>do-while</strong> is an exit-controlled loop. The body runs first, THEN the condition is checked. Even if the condition is false from the start, it still executes once.</div>
+    </div>
+
+    <div class="mcq-card" id="q2_3">
+      <div class="q-source">PYQ · End Sem 2022-23 · Section A</div>
+      <div class="q-text">Q. Assuming int is 4 bytes, what is the size of <code style="font-family:'JetBrains Mono',monospace;color:var(--accent3)">int arr[15]</code>?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q2_3')">A) 15 bytes</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q2_3')">B) 19 bytes</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q2_3')">C) 11 bytes</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q2_3')">D) 60 bytes</button>
+      </div>
+      <div class="explanation" id="exp_q2_3">✅ 15 elements × 4 bytes/int = <strong>60 bytes</strong>. Array size = number_of_elements × sizeof(data_type).</div>
+    </div>
+
+    <div class="mcq-card" id="q2_4">
+      <div class="q-source">PYQ · CA 2024-25 · Section A</div>
+      <div class="q-text">Q. What is the output of the following code?<br><code style="font-family:'JetBrains Mono',monospace;color:var(--accent3)">for(i=0; i&lt;3; i++) printf("%d ", i);</code></div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, true, 'q2_4')">A) 0 1 2</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q2_4')">B) 1 2 3</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q2_4')">C) 0 1 2 3</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q2_4')">D) None of the above</button>
+      </div>
+      <div class="explanation" id="exp_q2_4">✅ i starts at 0, loop runs while i&lt;3 (so i = 0,1,2), prints each. Output: <strong>0 1 2</strong>. The loop stops BEFORE i becomes 3.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ UNIT 3 ══════════════ -->
+<div class="unit" id="unit-3">
+  <div class="unit-header">
+    <div class="unit-num">03</div>
+    <div class="unit-title-block">
+      <h2>POINTERS & FUNCTIONS</h2>
+      <p>Pointer types · Arithmetic · Call by Value/Ref · Recursion · DMA</p>
+    </div>
+  </div>
+
+  <div class="malan-says">
+    <p>"A pointer is just a variable that stores an address. Say it with me. An address. That's it. Everything else follows from that one idea."</p>
+  </div>
+
+  <div class="card">
+    <h3>📌 POINTER FUNDAMENTALS</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>The classic pointer program (PYQ 2022-23 Section C)</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> x = <span class="num">5</span>;
+    <span class="kw">int</span> *p = &amp;x;       <span class="cm">// p stores the address of x</span>
+
+    <span class="fn">printf</span>(<span class="str">"Value of x: %d\n"</span>, x);      <span class="cm">// 5</span>
+    <span class="fn">printf</span>(<span class="str">"Value of p: %p\n"</span>, p);      <span class="cm">// address of x (e.g., 0x7fff...)</span>
+    <span class="fn">printf</span>(<span class="str">"Value at p: %d\n"</span>, *p);     <span class="cm">// 5  (dereferencing)</span>
+
+    *p = <span class="num">10</span>;  <span class="cm">// change x THROUGH the pointer</span>
+    <span class="fn">printf</span>(<span class="str">"New x: %d\n"</span>, x);           <span class="cm">// 10</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+    </div>
+    <div class="trap">
+      PYQ Section A: <code style="font-family:'JetBrains Mono',monospace;color:var(--accent3)">int x=5; int *p = &x; printf("%p", p);</code> → prints the <strong>memory address of x</strong>, NOT 5.
+    </div>
+  </div>
+
+  <div class="card yellow">
+    <h3>🔴 4 TYPES OF POINTERS — All 4 asked in PYQ 2024-25</h3>
+    <table class="styled-table">
+      <tr><th>POINTER TYPE</th><th>DEFINITION</th><th>DANGER</th></tr>
+      <tr>
+        <td style="color:var(--accent2)">NULL Pointer</td>
+        <td>Points to memory address 0. Initialized as <code style="color:var(--accent3)">int *p = NULL;</code></td>
+        <td>Safe — dereferencing causes crash but it's defined behavior</td>
+      </tr>
+      <tr>
+        <td style="color:var(--accent3)">Wild Pointer</td>
+        <td>Declared but NOT initialized. Points to random garbage address.</td>
+        <td>⚠️ Extremely dangerous — can corrupt any memory location</td>
+      </tr>
+      <tr>
+        <td style="color:var(--accent)">Dangling Pointer</td>
+        <td>Pointer to memory that has been freed/deallocated.</td>
+        <td>⚠️ Very dangerous — memory is no longer valid</td>
+      </tr>
+      <tr>
+        <td style="color:#c792ea">Void Pointer</td>
+        <td>Generic pointer: <code style="color:var(--accent3)">void *p;</code> — can hold address of any type</td>
+        <td>Must cast before dereferencing</td>
+      </tr>
+    </table>
+    <div class="trap">
+      "NULL pointer points to the 0th memory address" → <strong>FALSE</strong>. NULL pointer points to address 0 (which is not a valid/accessible address). You cannot use it. (PYQ CA 2022-23)
+    </div>
+  </div>
+
+  <div class="card green">
+    <h3>📞 CALL BY VALUE vs CALL BY REFERENCE — #1 long answer topic</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Swap using Call by VALUE (does NOT work)</span></div>
+<pre><span class="kw">void</span> <span class="fn">swap</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) {
+    <span class="kw">int</span> temp = a;
+    a = b;
+    b = temp;
+    <span class="cm">// a and b are COPIES — original unchanged!</span>
+}
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> x=<span class="num">5</span>, y=<span class="num">10</span>;
+    <span class="fn">swap</span>(x, y);
+    <span class="fn">printf</span>(<span class="str">"%d %d"</span>, x, y); <span class="cm">// Still 5 10 !</span>
+}</pre>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Swap using Call by REFERENCE (works!)</span></div>
+<pre><span class="kw">void</span> <span class="fn">swap</span>(<span class="kw">int</span> *a, <span class="kw">int</span> *b) {
+    <span class="kw">int</span> temp = *a;
+    *a = *b;
+    *b = temp;
+    <span class="cm">// Modifying actual memory → works!</span>
+}
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> x=<span class="num">5</span>, y=<span class="num">10</span>;
+    <span class="fn">swap</span>(&amp;x, &amp;y);   <span class="cm">// pass ADDRESSES</span>
+    <span class="fn">printf</span>(<span class="str">"%d %d"</span>, x, y); <span class="cm">// 10 5 ✓</span>
+}</pre>
+    </div>
+    <table class="styled-table">
+      <tr><th>FEATURE</th><th>CALL BY VALUE</th><th>CALL BY REFERENCE</th></tr>
+      <tr><td>What is passed</td><td>Copy of value</td><td>Address of variable</td></tr>
+      <tr><td>Original changed?</td><td>NO</td><td>YES</td></tr>
+      <tr><td>Memory</td><td>More (extra copy)</td><td>Less</td></tr>
+      <tr><td>Use case</td><td>When original must not change</td><td>When you need to modify original</td></tr>
+    </table>
+    <div class="trap">
+      "An entire array is always passed by ___ to a called function." → <strong>Call by reference (address)</strong> (PYQ CA 2022-23)
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h3>🌀 RECURSION — Fibonacci & Factorial</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Factorial — Recursive</span></div>
+<pre><span class="kw">int</span> <span class="fn">factorial</span>(<span class="kw">int</span> n) {
+    <span class="kw">if</span> (n == <span class="num">0</span> || n == <span class="num">1</span>) <span class="kw">return</span> <span class="num">1</span>;  <span class="cm">// base case</span>
+    <span class="kw">return</span> n * <span class="fn">factorial</span>(n - <span class="num">1</span>);        <span class="cm">// recursive call</span>
+}
+<span class="cm">// factorial(5) = 5*4*3*2*1 = 120</span></pre>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Fibonacci WITHOUT recursion (PYQ 2022-23)</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, a=<span class="num">0</span>, b=<span class="num">1</span>, c, i;
+    <span class="fn">printf</span>(<span class="str">"Enter n: "</span>); <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;n);
+    <span class="fn">printf</span>(<span class="str">"%d %d "</span>, a, b);
+    <span class="kw">for</span>(i=<span class="num">2</span>; i&lt;n; i++) {
+        c = a + b;
+        <span class="fn">printf</span>(<span class="str">"%d "</span>, c);
+        a = b; b = c;
+    }
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📐 FUNCTION PROTOTYPES — 4 categories (PYQ 2024-25)</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>All 4 types of user-defined functions</span></div>
+<pre><span class="cm">// Type 1: No param, no return</span>
+<span class="kw">void</span> <span class="fn">greet</span>() { <span class="fn">printf</span>(<span class="str">"Hello!\n"</span>); }
+
+<span class="cm">// Type 2: With param, no return</span>
+<span class="kw">void</span> <span class="fn">printSquare</span>(<span class="kw">int</span> n) { <span class="fn">printf</span>(<span class="str">"%d\n"</span>, n*n); }
+
+<span class="cm">// Type 3: No param, with return</span>
+<span class="kw">int</span> <span class="fn">getNumber</span>() { <span class="kw">return</span> <span class="num">42</span>; }
+
+<span class="cm">// Type 4: With param, with return</span>
+<span class="kw">int</span> <span class="fn">add</span>(<span class="kw">int</span> a, <span class="kw">int</span> b) { <span class="kw">return</span> a + b; }</pre>
+    </div>
+    <div class="trap">
+      "Functions can return any type except ___" → <strong>Arrays and functions</strong>. A function CANNOT directly return an array or another function. (PYQ 2022-23)
+    </div>
+  </div>
+
+  <!-- UNIT 3 MCQs -->
+  <div class="quiz-section">
+    <h3>🎯 UNIT 3 · MCQ DRILL</h3>
+
+    <div class="mcq-card" id="q3_1">
+      <div class="q-source">PYQ · CA-II 2022-23 · Section A</div>
+      <div class="q-text">Q. NULL pointer points to the 0th memory address. Is this True or False?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q3_1')">A) True</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q3_1')">B) False</button>
+      </div>
+      <div class="explanation" id="exp_q3_1">✅ <strong>False</strong>. NULL pointer is assigned the value 0, meaning it does NOT point to any valid/accessible memory location. It's a special sentinel value, not a usable address. Dereferencing it causes a segmentation fault.</div>
+    </div>
+
+    <div class="mcq-card" id="q3_2">
+      <div class="q-source">PYQ · CA-II 2022-23 · Section A</div>
+      <div class="q-text">Q. A pointer is a: (select the MOST complete answer)</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q3_2')">A) A keyword used to create variables</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q3_2')">B) A variable that stores the location of another variable</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q3_2')">C) A variable that stores the address of an instruction</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q3_2')">D) A variable that stores the address/location of another variable</button>
+      </div>
+      <div class="explanation" id="exp_q3_2">✅ A pointer is a variable that stores the memory address (location) of another variable. The key word is "address". When asked for a single definition: "a variable that stores the address of another variable."</div>
+    </div>
+
+    <div class="mcq-card" id="q3_3">
+      <div class="q-source">PYQ · CA-II 2022-23 · Section A</div>
+      <div class="q-text">Q. What is the output?<br><code style="font-family:'JetBrains Mono',monospace;color:var(--accent3)">int x=5; int *p=&x; printf("%p", p);</code></div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q3_3')">A) 5</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q3_3')">B) The memory address of x</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q3_3')">C) 0x5</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q3_3')">D) An error</button>
+      </div>
+      <div class="explanation" id="exp_q3_3">✅ p stores the ADDRESS of x. %p prints that address (like 0x7ffee...). To print the VALUE (5), you'd use *p with %d. Critical distinction: p = address, *p = value at that address.</div>
+    </div>
+
+    <div class="mcq-card" id="q3_4">
+      <div class="q-source">PYQ · CA-II 2022-23 · Section A</div>
+      <div class="q-text">Q. An entire array is always passed ___ to a called function.</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q3_4')">A) Call by value</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q3_4')">B) Call by reference</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q3_4')">C) Address relocation</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q3_4')">D) Address restructure</button>
+      </div>
+      <div class="explanation" id="exp_q3_4">✅ Arrays are ALWAYS passed by reference (the base address is passed). Any modification to the array inside the function WILL affect the original array.</div>
+    </div>
+
+    <div class="mcq-card" id="q3_5">
+      <div class="q-source">PYQ · End Sem 2022-23 · Section A</div>
+      <div class="q-text">Q. Comment on: <code style="font-family:'JetBrains Mono',monospace;color:var(--accent3)">int *ptr, p;</code></div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, true, 'q3_5')">A) ptr is a pointer to integer, p is NOT a pointer</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q3_5')">B) Both ptr and p are pointers to integer</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q3_5')">C) ptr is pointer, p may or may not be</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q3_5')">D) Neither is a pointer</button>
+      </div>
+      <div class="explanation" id="exp_q3_5">✅ The * applies only to ptr, not p. So ptr is int*, and p is just int. To make both pointers: int *ptr, *p;</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ UNIT 4 ══════════════ -->
+<div class="unit" id="unit-4">
+  <div class="unit-header">
+    <div class="unit-num">04</div>
+    <div class="unit-title-block">
+      <h2>ARRAYS & STRINGS</h2>
+      <p>1D/2D Arrays · Sorting · String Functions · Character Arrays</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📊 ARRAY FUNDAMENTALS</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Declaration, Initialization, Access</span></div>
+<pre><span class="cm">// Declaration</span>
+<span class="kw">int</span> arr[<span class="num">5</span>];
+
+<span class="cm">// Initialization</span>
+<span class="kw">int</span> arr[<span class="num">5</span>] = {<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>};
+
+<span class="cm">// Access: index starts at 0 !</span>
+arr[<span class="num">0</span>] = <span class="num">10</span>;   arr[<span class="num">4</span>] = <span class="num">50</span>;
+<span class="cm">// arr[5] = ??? → undefined behavior (out of bounds)</span>
+
+<span class="cm">// Arr[1] refers to ELEMENT at index 1, which is the 2nd element</span>
+<span class="cm">// "In C, Arr[1] refers to which element?" → 2nd element (value 20 above)</span></pre>
+    </div>
+    <div class="trap">
+      PYQ: "In C, Arr[1] refers to which element?" → The <strong>2nd element</strong> (index 0 is first). "Index of last element of array of size n?" → <strong>n-1</strong>
+    </div>
+  </div>
+
+  <div class="card yellow">
+    <h3>🫧 BUBBLE SORT — Write this from memory</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Bubble Sort (PYQ 2023-24, 2024-25)</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> arr[] = {<span class="num">64</span>, <span class="num">25</span>, <span class="num">12</span>, <span class="num">22</span>, <span class="num">11</span>};
+    <span class="kw">int</span> n = <span class="num">5</span>, i, j, temp;
+    
+    <span class="kw">for</span>(i = <span class="num">0</span>; i &lt; n-<span class="num">1</span>; i++) {
+        <span class="kw">for</span>(j = <span class="num">0</span>; j &lt; n-i-<span class="num">1</span>; j++) {
+            <span class="kw">if</span>(arr[j] &gt; arr[j+<span class="num">1</span>]) {
+                <span class="cm">// Swap adjacent elements</span>
+                temp = arr[j];
+                arr[j] = arr[j+<span class="num">1</span>];
+                arr[j+<span class="num">1</span>] = temp;
+            }
+        }
+    }
+    <span class="cm">// Output: 11 12 22 25 64</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+    </div>
+    <p style="margin-top:12px">How to remember: <strong>Compare adjacent pairs. Largest "bubbles up" to end each pass. Outer loop = n-1 passes. Inner loop = n-i-1 comparisons.</strong></p>
+  </div>
+
+  <div class="card green">
+    <h3>🔤 STRING HANDLING FUNCTIONS — All 6 important ones</h3>
+    <table class="styled-table">
+      <tr><th>FUNCTION</th><th>HEADER</th><th>WHAT IT DOES</th><th>EXAMPLE</th></tr>
+      <tr><td style="color:var(--accent2)">strlen(s)</td><td>string.h</td><td>Returns length (without '\0')</td><td>strlen("Hello") = 5</td></tr>
+      <tr><td style="color:var(--accent3)">strcpy(d, s)</td><td>string.h</td><td>Copies s into d</td><td>strcpy(b, "Hi")</td></tr>
+      <tr><td style="color:var(--accent)">strcat(d, s)</td><td>string.h</td><td>Appends s to end of d</td><td>"Hello"+"World"="HelloWorld"</td></tr>
+      <tr><td style="color:#c792ea">strcmp(s1, s2)</td><td>string.h</td><td>Compares: 0=equal, &lt;0/&gt;0</td><td>strcmp("a","a") = 0</td></tr>
+      <tr><td style="color:var(--accent4)">strupr(s)</td><td>string.h</td><td>Converts to uppercase</td><td>"hello"→"HELLO"</td></tr>
+      <tr><td style="color:var(--accent2)">strlwr(s)</td><td>string.h</td><td>Converts to lowercase</td><td>"HELLO"→"hello"</td></tr>
+    </table>
+    <div class="trap">
+      Strings in C are null-terminated. "Hello" is stored as: H-e-l-l-o-\0 (6 bytes total). strlen returns 5, not 6.
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h3>🏆 LARGEST ELEMENT using POINTER (PYQ Section C)</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Find largest element using pointer</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> arr[] = {<span class="num">12</span>, <span class="num">45</span>, <span class="num">7</span>, <span class="num">89</span>, <span class="num">23</span>};
+    <span class="kw">int</span> n = <span class="num">5</span>;
+    <span class="kw">int</span> *p = arr;    <span class="cm">// pointer to first element</span>
+    <span class="kw">int</span> max = *p;    <span class="cm">// assume first is max</span>
+    
+    <span class="kw">for</span>(<span class="kw">int</span> i = <span class="num">1</span>; i &lt; n; i++) {
+        <span class="kw">if</span>(*(p+i) &gt; max) {
+            max = *(p+i);
+        }
+    }
+    <span class="fn">printf</span>(<span class="str">"Largest = %d\n"</span>, max); <span class="cm">// 89</span>
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📐 2D ARRAYS — Multi-dimensional</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>2D Array — Matrix</span></div>
+<pre><span class="cm">// Declaration: rows=3, cols=3</span>
+<span class="kw">int</span> matrix[<span class="num">3</span>][<span class="num">3</span>] = {
+    {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>},
+    {<span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>},
+    {<span class="num">7</span>, <span class="num">8</span>, <span class="num">9</span>}
+};
+<span class="cm">// Access: matrix[row][col] → matrix[1][2] = 6</span>
+
+<span class="cm">// Traverse with nested loops:</span>
+<span class="kw">for</span>(<span class="kw">int</span> i=<span class="num">0</span>; i&lt;<span class="num">3</span>; i++) {
+    <span class="kw">for</span>(<span class="kw">int</span> j=<span class="num">0</span>; j&lt;<span class="num">3</span>; j++) {
+        <span class="fn">printf</span>(<span class="str">"%d "</span>, matrix[i][j]);
+    }
+    <span class="fn">printf</span>(<span class="str">"\n"</span>);
+}</pre>
+    </div>
+  </div>
+
+  <!-- Unit 4 MCQs -->
+  <div class="quiz-section">
+    <h3>🎯 UNIT 4 · MCQ DRILL</h3>
+
+    <div class="mcq-card" id="q4_1">
+      <div class="q-source">PYQ · CA-II 2022-23 · Section A</div>
+      <div class="q-text">Q. What is the output?<br><code style="font-family:'JetBrains Mono',monospace;color:var(--accent3)">int a[]={2,4,6,8}; printf("%d", a[2]);</code></div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q4_1')">A) 2</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_1')">B) 4</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q4_1')">C) 6</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_1')">D) 8</button>
+      </div>
+      <div class="explanation" id="exp_q4_1">✅ a[0]=2, a[1]=4, a[2]=<strong>6</strong>, a[3]=8. Arrays are zero-indexed! a[2] is the THIRD element.</div>
+    </div>
+
+    <div class="mcq-card" id="q4_2">
+      <div class="q-source">PYQ · CA-II 2022-23 · Section A</div>
+      <div class="q-text">Q. What is the correct syntax for declaring an array of 10 integers in C?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, true, 'q4_2')">A) int[10] arr;</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_2')">B) int arr[10];</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_2')">C) arr[10] int;</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_2')">D) 10 int arr;</button>
+      </div>
+      <div class="explanation" id="exp_q4_2">✅ The correct syntax is <strong>int arr[10];</strong> — data_type name[size]. Note: option A is wrong (type before name). The answer in the PYQ was int arr[10].</div>
+    </div>
+
+    <div class="mcq-card" id="q4_3">
+      <div class="q-source">PYQ · CA-II 2022-23 · Section A</div>
+      <div class="q-text">Q. In C programming, Arr[1] refers to which element of array Arr?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q4_3')">A) 1st element</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q4_3')">B) 2nd element</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_3')">C) 3rd element</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_3')">D) 0th element</button>
+      </div>
+      <div class="explanation" id="exp_q4_3">✅ Index 0 = 1st element, Index 1 = <strong>2nd element</strong>. Arrays in C are zero-indexed. Arr[0] is the first, Arr[1] is the second.</div>
+    </div>
+
+    <div class="mcq-card" id="q4_4">
+      <div class="q-source">PYQ · End Sem 2022-23 · Section A</div>
+      <div class="q-text">Q. What is the output of this program?<br><code style="font-family:'JetBrains Mono',monospace;color:var(--accent3)">int a[]={1,2,3,4}; int sum=0; for(i=0;i&lt;4;i++) sum+=a[i]; printf("%d",sum);</code></div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q4_4')">A) 1</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_4')">B) 4</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_4')">C) 20</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q4_4')">D) 10</button>
+      </div>
+      <div class="explanation" id="exp_q4_4">✅ sum = 1+2+3+4 = <strong>10</strong>. Simple loop adding all 4 elements. Common Section-A trap: they want you to trace the loop.</div>
+    </div>
+
+    <div class="mcq-card" id="q4_5">
+      <div class="q-source">PYQ · CA-II 2022-23 · Section A</div>
+      <div class="q-text">Q. What is the index of the LAST element of an array of size n?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q4_5')">A) n</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q4_5')">B) n-1</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_5')">C) n+1</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q4_5')">D) n-2</button>
+      </div>
+      <div class="explanation" id="exp_q4_5">✅ Array of size n has indices 0 to <strong>n-1</strong>. Example: int arr[5] → indices 0,1,2,3,4. Last index = 4 = 5-1.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ UNIT 5 ══════════════ -->
+<div class="unit" id="unit-5">
+  <div class="unit-header">
+    <div class="unit-num">05</div>
+    <div class="unit-title-block">
+      <h2>STRUCTURES & DMA</h2>
+      <p>Structures · Unions · Nested Structs · malloc/calloc/realloc/free</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🏗️ STRUCTURES — Custom data type</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Student Database (PYQ classic)</span></div>
+<pre>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+<span class="kw">struct</span> Student {
+    <span class="kw">int</span> roll_no;
+    <span class="kw">char</span> name[<span class="num">50</span>];
+    <span class="kw">float</span> marks;
+};
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">struct</span> Student s1;        <span class="cm">// declare variable</span>
+    s1.roll_no = <span class="num">1</span>;
+    <span class="fn">strcpy</span>(s1.name, <span class="str">"Mohammad"</span>);
+    s1.marks = <span class="num">95.5</span>;
+    
+    <span class="fn">printf</span>(<span class="str">"Roll: %d, Name: %s, Marks: %.1f\n"</span>,
+           s1.roll_no, s1.name, s1.marks);
+    <span class="kw">return</span> <span class="num">0</span>;
+}
+
+<span class="cm">// Array of structures (50 students)</span>
+<span class="kw">struct</span> Student students[<span class="num">50</span>];</pre>
+    </div>
+  </div>
+
+  <div class="card yellow">
+    <h3>⚔️ STRUCTURE vs UNION — Most asked theory question</h3>
+    <table class="styled-table">
+      <tr><th>FEATURE</th><th>STRUCTURE</th><th>UNION</th></tr>
+      <tr><td>Keyword</td><td>struct</td><td>union</td></tr>
+      <tr><td>Memory</td><td>Sum of all member sizes</td><td>Size of LARGEST member only</td></tr>
+      <tr><td>Members active</td><td>All members simultaneously</td><td>Only ONE member at a time</td></tr>
+      <tr><td>Use case</td><td>Store different data together</td><td>Save memory when only one field needed</td></tr>
+      <tr><td>Example</td><td>Student (roll+name+marks)</td><td>Type conversion utilities</td></tr>
+    </table>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Memory Size Example</span></div>
+<pre><span class="kw">struct</span> S { <span class="kw">int</span> x; <span class="kw">float</span> y; <span class="kw">char</span> z; };
+<span class="cm">// sizeof(S) = 4 + 4 + 1 = 9 bytes (+ padding = 12)</span>
+
+<span class="kw">union</span> U { <span class="kw">int</span> x; <span class="kw">float</span> y; <span class="kw">char</span> z; };
+<span class="cm">// sizeof(U) = 4 bytes (only the LARGEST: int or float)</span></pre>
+    </div>
+    <div class="trap">
+      "Difference between structure and array?" → Structure can hold DIFFERENT data types; Array holds SAME data type.
+    </div>
+  </div>
+
+  <div class="card green">
+    <h3>🧠 DYNAMIC MEMORY ALLOCATION — malloc, calloc, free</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>DMA functions — stdlib.h required</span></div>
+<pre>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;    <span class="cm">// REQUIRED for DMA!</span>
+
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n = <span class="num">5</span>;
+    
+    <span class="cm">// malloc: allocates, does NOT initialize (garbage)</span>
+    <span class="kw">int</span> *p1 = (<span class="kw">int</span>*) <span class="fn">malloc</span>(n * <span class="kw">sizeof</span>(<span class="kw">int</span>));
+    
+    <span class="cm">// calloc: allocates AND initializes to 0</span>
+    <span class="kw">int</span> *p2 = (<span class="kw">int</span>*) <span class="fn">calloc</span>(n, <span class="kw">sizeof</span>(<span class="kw">int</span>));
+    
+    <span class="cm">// realloc: resize existing block</span>
+    p1 = (<span class="kw">int</span>*) <span class="fn">realloc</span>(p1, <span class="num">10</span> * <span class="kw">sizeof</span>(<span class="kw">int</span>));
+    
+    <span class="cm">// Always free when done!</span>
+    <span class="fn">free</span>(p1);
+    <span class="fn">free</span>(p2);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+    </div>
+    <table class="styled-table">
+      <tr><th>FUNCTION</th><th>SYNTAX</th><th>INITIALIZES?</th><th>ARGS</th></tr>
+      <tr><td style="color:var(--accent2)">malloc</td><td>malloc(size)</td><td>NO (garbage)</td><td>1 arg: total bytes</td></tr>
+      <tr><td style="color:var(--accent3)">calloc</td><td>calloc(n, size)</td><td>YES (zeros)</td><td>2 args: count, size each</td></tr>
+      <tr><td style="color:var(--accent)">realloc</td><td>realloc(ptr, newsize)</td><td>Preserves old data</td><td>2 args: ptr, new size</td></tr>
+      <tr><td style="color:#c792ea">free</td><td>free(ptr)</td><td>Deallocates memory</td><td>1 arg: pointer</td></tr>
+    </table>
+    <div class="trap">
+      "Which header is needed for DMA functions?" → <strong>stdlib.h</strong> (NOT stdio.h!). (PYQ 2022-23, Section A)
+    </div>
+  </div>
+
+  <div class="card blue">
+    <h3>🔗 NESTED STRUCTURES (PYQ 2023-24)</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>Structure inside Structure</span></div>
+<pre><span class="kw">struct</span> Date {
+    <span class="kw">int</span> day, month, year;
+};
+
+<span class="kw">struct</span> Employee {
+    <span class="kw">int</span> empno;
+    <span class="kw">char</span> empname[<span class="num">50</span>];
+    <span class="kw">float</span> salary;
+    <span class="kw">struct</span> Date dob;     <span class="cm">// nested structure</span>
+};
+
+<span class="kw">struct</span> Employee e1;
+e1.dob.day = <span class="num">1</span>;         <span class="cm">// access nested member</span>
+e1.dob.month = <span class="num">1</span>;
+e1.dob.year = <span class="num">2005</span>;</pre>
+    </div>
+  </div>
+
+  <!-- Unit 5 MCQs -->
+  <div class="quiz-section">
+    <h3>🎯 UNIT 5 · MCQ DRILL</h3>
+
+    <div class="mcq-card" id="q5_1">
+      <div class="q-source">PYQ · End Sem 2022-23 · Section A</div>
+      <div class="q-text">Q. Which header file must be included to use dynamic memory allocation functions?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, true, 'q5_1')">A) stdlib.h</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_1')">B) stdio.h</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_1')">C) memory.h</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_1')">D) dos.h</button>
+      </div>
+      <div class="explanation" id="exp_q5_1">✅ <strong>stdlib.h</strong> contains malloc, calloc, realloc, and free. stdio.h is for printf/scanf. This is a classic Section-A trap — don't confuse them!</div>
+    </div>
+
+    <div class="mcq-card" id="q5_2">
+      <div class="q-source">PYQ · Theory</div>
+      <div class="q-text">Q. In a union, the size of the union is equal to:</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q5_2')">A) Sum of all member sizes</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q5_2')">B) Size of the largest member</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_2')">C) Size of the first member</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_2')">D) Size of the smallest member</button>
+      </div>
+      <div class="explanation" id="exp_q5_2">✅ A union shares memory — all members occupy the <strong>same memory location</strong>. Size = size of the largest member. Only one member can hold a value at a time.</div>
+    </div>
+
+    <div class="mcq-card" id="q5_3">
+      <div class="q-source">PYQ · CA 2024-25 · Theory</div>
+      <div class="q-text">Q. What is the difference between malloc() and calloc()?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'q5_3')">A) malloc initializes to 0; calloc does not</button>
+        <button class="opt-btn" onclick="answer(this, true, 'q5_3')">B) calloc initializes to 0; malloc leaves garbage values</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_3')">C) They are identical in behavior</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_3')">D) malloc takes 2 args; calloc takes 1 arg</button>
+      </div>
+      <div class="explanation" id="exp_q5_3">✅ <strong>calloc</strong> initializes all allocated memory to zero. <strong>malloc</strong> allocates without initialization (contains garbage). Also: calloc(n, size) takes 2 args; malloc(n*size) takes 1 arg.</div>
+    </div>
+
+    <div class="mcq-card" id="q5_4">
+      <div class="q-source">PYQ · Theory</div>
+      <div class="q-text">Q. Can we prefer structure over array while maintaining a record of 100 student names?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, true, 'q5_4')">A) Yes — structure is better when storing different data types per student</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_4')">B) No — arrays are always better for records</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_4')">C) No — structures cannot store arrays</button>
+        <button class="opt-btn" onclick="answer(this, false, 'q5_4')">D) Yes — structures use less memory</button>
+      </div>
+      <div class="explanation" id="exp_q5_4">✅ <strong>Yes</strong>. For records with mixed types (roll_no + name + marks), structure is ideal. Array can only store ONE type. Array of structures = best of both worlds. (PYQ 2024-25 Section C)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PYQ BATTLE ══════════════ -->
+<div class="unit" id="unit-6">
+  <div class="unit-header">
+    <div class="unit-num">⚡</div>
+    <div class="unit-title-block">
+      <h2>PYQ BATTLE MODE</h2>
+      <p>Mixed questions from all years · No hints until you answer</p>
+    </div>
+  </div>
+
+  <div class="malan-says">
+    <p>"The best way to prepare for an exam is to simulate the exam. These are all real questions from your actual papers. No mercy. Clock's ticking."</p>
+  </div>
+
+  <div class="card yellow">
+    <h3>⚡ RAPID-FIRE: TRICKY CODE OUTPUT QUESTIONS</h3>
+    
+    <div class="mcq-card" id="qb_1">
+      <div class="q-source">PYQ · CA-II 2022-23 · Section A (j)</div>
+      <div class="q-text">Q. What is the output?<br><code style="font-family:'JetBrains Mono',monospace;color:var(--accent3)">int arr[]={1,2,3}; printf("%d", sizeof(arr)/sizeof(int));</code></div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'qb_1')">A) 4</button>
+        <button class="opt-btn" onclick="answer(this, false, 'qb_1')">B) 12</button>
+        <button class="opt-btn" onclick="answer(this, true, 'qb_1')">C) 3</button>
+        <button class="opt-btn" onclick="answer(this, false, 'qb_1')">D) 1</button>
+      </div>
+      <div class="explanation" id="exp_qb_1">✅ sizeof(arr) = 3×4 = 12 bytes. sizeof(int) = 4. 12/4 = <strong>3</strong>. This is the classic idiom to find array length!</div>
+    </div>
+
+    <div class="mcq-card" id="qb_2">
+      <div class="q-source">PYQ · End Sem 2024-25</div>
+      <div class="q-text">Q. Which of the following is NOT a valid way to declare a function in C?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, true, 'qb_2')">A) int func();</button>
+        <button class="opt-btn" onclick="answer(this, false, 'qb_2')">B) int func(int x);</button>
+        <button class="opt-btn" onclick="answer(this, false, 'qb_2')">C) int func(int x, int y);</button>
+        <button class="opt-btn" onclick="answer(this, false, 'qb_2')">D) void func(int x, int y) {};</button>
+      </div>
+      <div class="explanation" id="exp_qb_2">✅ All are valid! Actually in the PYQ, option D was <code>void func(int x, int y) {};</code> — the extra semicolon after } is not standard but the question intended it as invalid. int func() is valid (no params). Review: all function prototypes with proper type are valid.</div>
+    </div>
+
+    <div class="mcq-card" id="qb_3">
+      <div class="q-source">PYQ · CA 2024-25 · Section A</div>
+      <div class="q-text">Q. Which of the following is correct about pointers? (select ALL that apply)</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'qb_3')">A) A pointer stores the value of another variable</button>
+        <button class="opt-btn" onclick="answer(this, false, 'qb_3')">B) A pointer can be dereferenced using &amp;</button>
+        <button class="opt-btn" onclick="answer(this, false, 'qb_3')">C) NULL is a pointer pointing to address 1</button>
+        <button class="opt-btn" onclick="answer(this, true, 'qb_3')">D) All of the above (A=address, B=*, C=address 0)</button>
+      </div>
+      <div class="explanation" id="exp_qb_3">✅ Corrections: A pointer stores the <strong>ADDRESS</strong> (not value). Dereferenced using <strong>*</strong> (not &amp;). NULL points to address <strong>0</strong> (not 1). The PYQ answer was "All of the above" — meaning all 3 corrected statements are true together.</div>
+    </div>
+
+    <div class="mcq-card" id="qb_4">
+      <div class="q-source">PYQ · End Sem 2022-23 · Section A</div>
+      <div class="q-text">Q. Which of the following is TRUE about return types of functions in C?</div>
+      <div class="options">
+        <button class="opt-btn" onclick="answer(this, false, 'qb_4')">A) Functions can return any type</button>
+        <button class="opt-btn" onclick="answer(this, true, 'qb_4')">B) Functions can return any type EXCEPT array and functions</button>
+        <button class="opt-btn" onclick="answer(this, false, 'qb_4')">C) Functions can return any type except array, functions, and union</button>
+        <button class="opt-btn" onclick="answer(this, false, 'qb_4')">D) Functions cannot return any pointer types</button>
+      </div>
+      <div class="explanation" id="exp_qb_4">✅ In C, functions <strong>cannot directly return arrays or other functions</strong>. They CAN return pointers (including pointer to array/function), structs, unions, and all primitive types.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>📝 MUST-WRITE PROGRAMS — Master these 8</h3>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>#1: Armstrong Number Check (PYQ 2022-23)</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, original, rem, result = <span class="num">0</span>;
+    <span class="fn">printf</span>(<span class="str">"Enter: "</span>); <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;n);
+    original = n;
+    <span class="kw">while</span> (original != <span class="num">0</span>) {
+        rem = original % <span class="num">10</span>;
+        result += rem * rem * rem;  <span class="cm">// cube of each digit</span>
+        original /= <span class="num">10</span>;
+    }
+    <span class="kw">if</span> (result == n) <span class="fn">printf</span>(<span class="str">"%d is Armstrong\n"</span>, n);
+    <span class="kw">else</span> <span class="fn">printf</span>(<span class="str">"%d is NOT Armstrong\n"</span>, n);
+    <span class="kw">return</span> <span class="num">0</span>;
+}
+<span class="cm">// 153 = 1³+5³+3³ = 1+125+27 = 153 ✓</span></pre>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>#2: Palindrome Check (PYQ 2022-23)</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, reversed = <span class="num">0</span>, original, rem;
+    <span class="fn">printf</span>(<span class="str">"Enter: "</span>); <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;n);
+    original = n;
+    <span class="kw">while</span> (n != <span class="num">0</span>) {
+        rem = n % <span class="num">10</span>;
+        reversed = reversed * <span class="num">10</span> + rem;
+        n /= <span class="num">10</span>;
+    }
+    <span class="kw">if</span> (original == reversed) <span class="fn">printf</span>(<span class="str">"Palindrome\n"</span>);
+    <span class="kw">else</span> <span class="fn">printf</span>(<span class="str">"Not Palindrome\n"</span>);
+    <span class="kw">return</span> <span class="num">0</span>;
+}
+<span class="cm">// 121 reversed = 121 → Palindrome</span></pre>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>#3: Celsius to Fahrenheit (PYQ Practical #3)</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">float</span> c, f;
+    <span class="fn">printf</span>(<span class="str">"Enter Celsius: "</span>); <span class="fn">scanf</span>(<span class="str">"%f"</span>, &amp;c);
+    f = (c * <span class="num">9</span> / <span class="num">5</span>) + <span class="num">32</span>;
+    <span class="fn">printf</span>(<span class="str">"Fahrenheit = %.2f\n"</span>, f);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+    </div>
+    <div class="code-block">
+      <div class="code-header"><span class="lang">C</span><span>#4: Decimal to Binary (PYQ Practical #5)</span></div>
+<pre>#include &lt;stdio.h&gt;
+<span class="kw">int</span> <span class="fn">main</span>() {
+    <span class="kw">int</span> n, binary[<span class="num">32</span>], i = <span class="num">0</span>;
+    <span class="fn">printf</span>(<span class="str">"Enter decimal: "</span>); <span class="fn">scanf</span>(<span class="str">"%d"</span>, &amp;n);
+    <span class="kw">while</span> (n > <span class="num">0</span>) {
+        binary[i++] = n % <span class="num">2</span>;
+        n /= <span class="num">2</span>;
+    }
+    <span class="fn">printf</span>(<span class="str">"Binary: "</span>);
+    <span class="kw">for</span>(<span class="kw">int</span> j = i-<span class="num">1</span>; j >= <span class="num">0</span>; j--)
+        <span class="fn">printf</span>(<span class="str">"%d"</span>, binary[j]);
+    <span class="kw">return</span> <span class="num">0</span>;
+}</pre>
+    </div>
+  </div>
+
+  <div class="card green">
+    <h3>🎓 FINAL EXAM CHECKLIST — Tick these off</h3>
+    <table class="styled-table">
+      <tr><th>CAN YOU WRITE FROM MEMORY?</th><th>STATUS</th></tr>
+      <tr><td>Bubble Sort in C</td><td style="color:var(--accent3)">MUST KNOW ⭐⭐⭐</td></tr>
+      <tr><td>Swap using Call by Reference</td><td style="color:var(--accent3)">MUST KNOW ⭐⭐⭐</td></tr>
+      <tr><td>Fibonacci without recursion</td><td style="color:var(--accent3)">MUST KNOW ⭐⭐⭐</td></tr>
+      <tr><td>Factorial using recursion</td><td style="color:var(--accent3)">MUST KNOW ⭐⭐⭐</td></tr>
+      <tr><td>Star pattern (triangle)</td><td style="color:var(--accent3)">MUST KNOW ⭐⭐⭐</td></tr>
+      <tr><td>Armstrong number check</td><td style="color:var(--accent2)">IMPORTANT ⭐⭐</td></tr>
+      <tr><td>Palindrome check</td><td style="color:var(--accent2)">IMPORTANT ⭐⭐</td></tr>
+      <tr><td>Structure with 50 students</td><td style="color:var(--accent2)">IMPORTANT ⭐⭐</td></tr>
+      <tr><td>Largest element using pointer</td><td style="color:var(--accent2)">IMPORTANT ⭐⭐</td></tr>
+      <tr><td>String reverse using pointer</td><td style="color:var(--accent)">GOOD TO HAVE ⭐</td></tr>
+      <tr><td>malloc/calloc program</td><td style="color:var(--accent)">GOOD TO HAVE ⭐</td></tr>
+    </table>
+  </div>
+</div>
+
+</div><!-- end #content -->
+
+<div id="score-bar">
+  <span class="score-label">CORRECT</span>
+  <span class="score-val" id="correct-count">0</span>
+  <span class="score-label">WRONG</span>
+  <span class="score-val" style="color:var(--accent)" id="wrong-count">0</span>
+  <span class="score-label">ACCURACY</span>
+  <span class="score-val" id="accuracy">—</span>
+  <button class="reset-btn" onclick="resetScore()">RESET</button>
+</div>
+
+<script>
+let correct = 0, wrong = 0;
+
+function showUnit(n) {
+  document.querySelectorAll('.unit').forEach(u => u.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('unit-'+n).classList.add('active');
+  document.querySelectorAll('.nav-btn')[n].classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function answer(btn, isCorrect, qId) {
+  const card = document.getElementById(qId);
+  const buttons = card.querySelectorAll('.opt-btn');
+  const exp = document.getElementById('exp_'+qId);
+  
+  buttons.forEach(b => b.disabled = true);
+  
+  if (isCorrect) {
+    btn.classList.add('correct');
+    correct++;
+  } else {
+    btn.classList.add('wrong');
+    wrong++;
+    // highlight correct
+    buttons.forEach(b => {
+      if(b.onclick.toString().includes('true')) b.classList.add('correct');
+    });
+  }
+  
+  exp.classList.add('show');
+  updateScore();
+}
+
+function updateScore() {
+  document.getElementById('correct-count').textContent = correct;
+  document.getElementById('wrong-count').textContent = wrong;
+  const total = correct + wrong;
+  if(total > 0) {
+    const acc = Math.round((correct/total)*100);
+    document.getElementById('accuracy').textContent = acc + '%';
+    document.getElementById('accuracy').style.color = 
+      acc >= 70 ? 'var(--accent2)' : acc >= 50 ? 'var(--accent3)' : 'var(--accent)';
+  }
+}
+
+function resetScore() {
+  correct = 0; wrong = 0;
+  document.getElementById('correct-count').textContent = '0';
+  document.getElementById('wrong-count').textContent = '0';
+  document.getElementById('accuracy').textContent = '—';
+  document.querySelectorAll('.opt-btn').forEach(b => {
+    b.disabled = false;
+    b.classList.remove('correct', 'wrong');
+  });
+  document.querySelectorAll('.explanation').forEach(e => e.classList.remove('show'));
+}
+</script>
+</body>
+</html>
